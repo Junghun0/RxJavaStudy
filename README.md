@@ -60,7 +60,7 @@
 3. 인자가 2개인 함수는 onNext와 onError 이벤트를 처리한다.
 4. 인자가 3개인 함수는 onNext, onError, onComplete 이벤트를 모두 처리할 수 있다.
 
-- 위의 함수 원형은 모두 Disposable 인터페이스의 객체를 리턴한다.
+  - 위의 함수 원형은 모두 Disposable 인터페이스의 객체를 리턴한다.
 
 ```java
 void dispose()
