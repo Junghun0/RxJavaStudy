@@ -24,6 +24,42 @@
  ```
  - 모든 데이터 발행이 완료되면 onComplete 이벤트 발생
  
+ ### subscribe() 함수
+
+- RxJava는 내가 동작시키기 원하는 것을 사전에 정의해둔 다음 실제 그것이 실행되는 시점을 조절 가능 -> 이때 사용하는 것이 **subscribe()** 이다.
+- Observable 은 just() 등의 팩토리 함수로 데이터 흐름을 정의한 후 subscribe() 함수를 호출해야 실제로 데이터를 발행함
+
+```java
+    public final Disposable subscribe() {
+        return subscribe(Functions.emptyConsumer(), Functions.ON_ERROR_MISSING, Functions.EMPTY_ACTION, Functions.emptyConsumer());
+    }
+```
+
+```java
+    public final Disposable subscribe(Consumer<? super T> onNext) {
+        return subscribe(onNext, Functions.ON_ERROR_MISSING, Functions.EMPTY_ACTION, Functions.emptyConsumer());
+    }
+```
+ 
+    
+```java
+   public final Disposable subscribe(Consumer<? super T> onNext, Consumer<? super Throwable> onError) {
+        return subscribe(onNext, onError, Functions.EMPTY_ACTION, Functions.emptyConsumer());
+    }
+```
+    
+```java  
+    public final Disposable subscribe(Consumer<? super T> onNext, Consumer<? super Throwable> onError,
+            Action onComplete) {
+        return subscribe(onNext, onError, onComplete, Functions.emptyConsumer());
+    }
+```
+
+1. 인자가 없는 subscribe() 함수는 onNext와 onComplete 이벤트를 무시하고 onError 이벤트가 발생했을 때만 OnErrorNotImplementedException을 던진다. 따라서 Observable로 작성한 코드를 테스트하거나 디버깅할 때 활용
+2. 인자가 1개 있는 오버로딩은 onNext 이벤트를 처리한다. 이때도 onError 이벤트가 발생하면 OnErrorNotImplementedException을 던진다.
+3. 인자가 2개인 함수는 onNext와 onError 이벤트를 처리한다.
+4. 인자가 3개인 함수는 onNext, onError, onComplete 이벤트를 모두 처리할 수 있다.
+ 
 
  
 
