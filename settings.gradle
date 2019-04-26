@@ -1,2 +1,3 @@
 rootProject.name = 'park'
+include 'example_1'
 
