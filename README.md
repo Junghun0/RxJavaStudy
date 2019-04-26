@@ -83,6 +83,61 @@ boolean isDisposed()
 
         System.out.println("isDisposed() : "+ disposable.isDisposed());
 ```
+
+### create() 함수
+ - onNext, onComplete, onError 같은 알람을 개발자가 직접 호출해야 한다.
+
+ 
+```java
+ Observable<Integer> source = Observable.create(
+                (ObservableEmitter<Integer> emitter) ->{
+                    emitter.onNext(100);
+                    emitter.onNext(200);
+                    emitter.onNext(300);
+                    emitter.onComplete();
+                });
+        source.subscribe(System.out::println);
+```
+ - subscribe() 을 호출하지 않으면 아무것도 출력되지 않는다.
+
+### fromArray() 함수
+ - 배열에 들어 있는 데이터를 처리할 때 사용
+
+```java
+public void makeFromArray(){
+        Integer[] arr = {100,200,300,400};
+        Observable<Integer> source = Observable.fromArray(arr);
+        source.subscribe(System.out::println);
+        System.out.println("---------------------");
+
+        /* int[] 로 선언할 경우 -> toIntegerArray 메소드 사용
+        int[] arr = {100,200,300,400};
+        Observable<Integer> source = Observable.fromArray(toIntegerArray(arr));
+        source.subscribe(System.out::println);
+        */
+    }
+    private static Integer[] toIntegerArray(int[] intArray){
+        return IntStream.of(intArray).boxed().toArray(Integer[]::new);
+    }
+```
+
+### fromIterable() 함수
+
+```java
+public void makeIterator(){
+        List<String> names = new ArrayList<>();
+        names.add("a");
+        names.add("b");
+        names.add("c");
+        names.add("d");
+
+        Observable<String> source = Observable.fromIterable(names);
+        System.out.println(source.subscribe().isDisposed());
+        source.subscribe(System.out::println);
+        System.out.println(source.subscribe().isDisposed());
+    }
+```
+
  
 
  
