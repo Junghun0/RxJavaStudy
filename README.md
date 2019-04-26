@@ -59,6 +59,30 @@
 2. 인자가 1개 있는 오버로딩은 onNext 이벤트를 처리한다. 이때도 onError 이벤트가 발생하면 OnErrorNotImplementedException을 던진다.
 3. 인자가 2개인 함수는 onNext와 onError 이벤트를 처리한다.
 4. 인자가 3개인 함수는 onNext, onError, onComplete 이벤트를 모두 처리할 수 있다.
+
+- 위의 함수 원형은 모두 Disposable 인터페이스의 객체를 리턴한다.
+
+```java
+void dispose()
+boolean isDisposed()
+```
+
+ - dispose()는 Observable에게 더 이상 데이터를 발행하지 않도록 구독을 해지하는 함수이다.
+ - Observable이 onComplete 알림을 보냈을 때 자동으로 dispose()를 호출해 Observable과 구독자의 관계를 끊는다.
+ - onComplete 이벤트가 정상적으로 발생했다면 구독자가 별도로 dispose()를 호출할 필요는 없다.
+
+```java
+    public void usingIsDisposed(){
+        Observable<String> source = Observable.just("RED","GREEN","YELLOW","BLUE");
+
+        Disposable disposable = source.subscribe(
+                v -> System.out.println("onNext() : value :" + v),
+                err -> System.err.println("onError() : err :" + err.getMessage()),
+                () -> System.out.println("onComplete()")
+        );
+
+        System.out.println("isDisposed() : "+ disposable.isDisposed());
+```
  
 
  
