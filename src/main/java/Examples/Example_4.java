@@ -1,6 +1,7 @@
 package Examples;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,17 @@ public class Example_4 {
         Observable<Order> observable = Observable.fromIterable(orderBlockingQueue);
         observable.subscribe(order -> System.out.println(order.getmId()));
         System.out.println("---------------------");
+    }
+
+    public void usingCreate(){
+        Observable<Integer> source = Observable.create(
+                (ObservableEmitter<Integer> emitter) ->{
+                    emitter.onNext(100);
+                    emitter.onNext(200);
+                    emitter.onNext(300);
+                    emitter.onComplete();
+                });
+        source.subscribe(System.out::println);
     }
 }
 
