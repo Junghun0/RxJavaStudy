@@ -138,6 +138,43 @@ public void makeIterator(){
     }
 ```
 
+### fromCallable() 함수
+
+ - 비동기 클래스나 인터페이스와의 연동
+ - Callable 인터페이스
+   - 비동기 실행 후 결과를 리턴하는 call() 메서드를 정의
+   - Runnable 인터페이스와는 실행 결과를 리턴한다는 점에서 차이가 있다.
+ 
+```java
+//람다 표현식을 사용할 때
+    public void usingCallable() {
+
+        Callable<String> callable = () -> {
+            Thread.sleep(2000);
+            return "Hello callable";
+        };
+
+        Observable<String> source = Observable.fromCallable(callable);
+        source.subscribe(System.out::println);
+    }
+```
+
+```java
+    //람다 표현식을 사용하지 않을때
+    public void usingCallable2() {
+        Callable<String> callable = new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                Thread.sleep(1000);
+                return "Hello callable2";
+            }
+        };
+
+        Observable<String> source = Observable.fromCallable(callable);
+        source.subscribe(System.out::println);
+    }
+```
+
  
 
  
