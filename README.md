@@ -196,6 +196,68 @@ public void usingFuture(){
     }
 ```
 
+### Single Class
+
+- 1
+ 	- Single.fromObservable 을 활용
+ 	- 기존 Observable에서 첫 번째 값을 발행하면 onSuccess 이벤트를 호출한 후 종료 
+
+ 
+```java
+//1.기존 Observable 에서 Single 객체로 변환하기
+        Observable<String> source = Observable.just("Hello Single!");
+        Single.fromObservable(source).subscribe(System.out::println);
+```
+
+ - 2
+ 	- just()를 통해 Observable에 single() 함수를. 호출한다.
+ 	- single() 함수는 default value 를 인자로 갖는다.
+ 	- Observable에서 값이 발행되지 않을 때도 인자로 넣은 기본값을 대신 발행함
+  
+ 
+```java
+//2. single() 함수를 호출해 Single 객체 생성하기
+        Observable.just("Hello Single!")
+                .single("default Item")
+                .subscribe(System.out::println);
+```
+
+ - 3
+ 	- 여러 개의 데이터를 발행할 수 있는 Observable을 Single 객체로 변환
+ 	- first() 를 호출하면 Observable 이 Single객체로 변환
+ 	- 하나 이상의 데이터를 발행하더라도 첫 번째 데이터 발행 후 onSuccess 이벤트 발생
+  
+ 
+```java
+//3. first() 함수를 호출해 Single 객체 생성하기
+        String[] colors = {"Red","Blue","Gold"};
+        Observable.fromArray(colors)
+                .first("default value")
+                .subscribe(System.out::println);
+```
+
+ - 4
+ 	- empty() 함수를 통해 Single 객체를 생성
+ 	- 첫 번째 데이터 발행 후 onSuccess 이벤트가 발생
+  
+```java
+//4. empty Observable 에서 Single 객체 생성하기
+        Observable.empty()
+                .single("default value")
+                .subscribe(System.out::println);
+```
+
+ - 5
+ 	- take() 함수를 통해 Single 객체를 생성
+  
+```java
+//5. take() 함수에서 Single 객체 생성하기
+        Observable.just(new Order("Order_1"),new Order("Order_2"))
+                .take(1)
+                .single(new Order("default order"))
+                .subscribe(System.out::println);
+```
+
  
 
  
