@@ -7,8 +7,9 @@ public class Main {
 //        new Example_3().makeFromArray();
 //        new Example_4().makeIterator();
 //        new Example_4().usingBlockingQueue();
-        new Example_5().usingCallable();
-        new Example_6().usingFuture();
+//        new Example_5().usingCallable();
+//        new Example_6().usingFuture();
+        new Example_8().usingSingle();
 
     }
 }
