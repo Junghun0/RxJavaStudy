@@ -175,6 +175,27 @@ public void makeIterator(){
     }
 ```
 
+### fromFuture() 함수
+
+ - 동시성 API 로 비동기 계산의 결과를 구할 때 사용
+ - Executor 인터페이스를 구현한 클래스에 Callable 객체를 인자로 넣어 Future 객체를 반환함
+ - get() 메서드를 호출하면 Callable 객체에서 구현한 계산 결과가 나올 때까지 블로킹 됨
+ - Executors 클래스는 단일 스레드 실행자(SingleThreadExecutor)뿐 아니라 다양한 스레드풀(FixedThreadPool, CachedThreadPool)을 지원함
+   - RxJava는 위와 같은 실행자를 사용하기보단 RxJava에서 제공하는 스케줄러를 활용하도록 권장함
+ 
+```java
+public void usingFuture(){
+
+        Future<String> future = Executors.newSingleThreadExecutor().submit(() -> {
+            Thread.sleep(1000);
+            return "Hello Future";
+        });
+
+        Observable<String> source = Observable.fromFuture(future);
+        source.subscribe(System.out::println);
+    }
+```
+
  
 
  
