@@ -8,6 +8,7 @@ public class Main {
 //        new Example_4().makeIterator();
 //        new Example_4().usingBlockingQueue();
         new Example_5().usingCallable();
+        new Example_6().usingFuture();
 
     }
 }
