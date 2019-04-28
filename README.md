@@ -258,6 +258,36 @@ public void usingFuture(){
                 .subscribe(System.out::println);
 ```
 
+### Hot Observable
+
+ - 구독자가 존재 여부와 관계없이 데이터를 발행하는 Observable
+ - 여러 구독자를 고려할 수 있다.
+ - 예를 들어 마우스 이벤트, 키보드 이벤트, 시스템 이벤트, 센서 데이터 등이 있다.
+ - 구현할 때 배압을 고려해야한다.
+ 	- 배압(back pressure) 는 데이터를 발행하는 속도와 구독자가 처리하는 속도의 차이가 클 때 발생한다.
+ 
+```java
+public void usingFuture(){
+
+        Future<String> future = Executors.newSingleThreadExecutor().submit(() -> {
+            Thread.sleep(1000);
+            return "Hello Future";
+        });
+
+        Observable<String> source = Observable.fromFuture(future);
+        source.subscribe(System.out::println);
+    }
+```
+
+### Subject Class
+
+- Cold Observable 을 Hot Observable 로 바꿔준다.
+- Observable 의 속성과 구독자의 속성이 모두 있다.
+- Observable처럼 데이터를 발행할 수도 있고 구독자처럼 발행된 데이터를 바로 처리할 수도 있다.
+- AsyncSubject, BehaviorSubject, PublishSubject, ReplaySubject 등이 있다.
+
+
+
  
 
  
