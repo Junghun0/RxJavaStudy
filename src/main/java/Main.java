@@ -12,6 +12,9 @@ public class Main {
 //        new Example_8().usingSingle();
 //        new Example_9().usingAsyncSubject();
 //        new Example_9().usingAsyncSubject2();
-        new Example_9().usingAsyncSubject3();
+//        new Example_9().usingAsyncSubject3();
+//        new Example_10().usingBehaviorSubject();
+//        new Example_11().usingPublishSubject();
+        new Example_12().usingReplaySubject();
     }
 }
