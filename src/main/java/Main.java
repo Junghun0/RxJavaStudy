@@ -10,7 +10,8 @@ public class Main {
 //        new Example_5().usingCallable();
 //        new Example_6().usingFuture();
 //        new Example_8().usingSingle();
-        new Example_9().usingAsyncSubject();
-
+//        new Example_9().usingAsyncSubject();
+//        new Example_9().usingAsyncSubject2();
+        new Example_9().usingAsyncSubject3();
     }
 }
