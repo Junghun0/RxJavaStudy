@@ -286,10 +286,114 @@ public void usingFuture(){
 - Observable처럼 데이터를 발행할 수도 있고 구독자처럼 발행된 데이터를 바로 처리할 수도 있다.
 - AsyncSubject, BehaviorSubject, PublishSubject, ReplaySubject 등이 있다.
 
+### AsyncSubject Class
 
-
+ - Observable에서 발행한 마지막 데이터를 얻어올 수 있는 Subject 클래스다.
+ - 완료되기 전 마지막 데이터에만 관심이 있으며 이전 데이터는 무시한다.
+ - AsyncSubject 객체는 정적 팩토리 함수인 create()로 생성한다. (Observable.create() 와 같은 기능)
  
-
  
+```java
+AsyncSubject<String> subject = AsyncSubject.create();
+        subject.subscribe(data -> System.out.println("SubScriber #1 =>"+data));
+        subject.onNext("1");
+        subject.onNext("3");
+        subject.subscribe(data -> System.out.println("Subscriber #2 =>"+ data));
+        subject.onNext("5");
+        subject.onComplete();
+```
 
+```java
+Float[] temperature = {10.1f, 13.4f, 12.5f};
+        Observable<Float> source = Observable.fromArray(temperature);
+
+        AsyncSubject<Float> subject = AsyncSubject.create();
+        subject.subscribe(data -> System.out.print("Subscriber #1 => "+ data));
+        source.subscribe(subject);
+```
+
+```java
+AsyncSubject<Integer> subject = AsyncSubject.create();
+        subject.onNext(10);
+        subject.onNext(11);
+        subject.subscribe(data -> System.out.println("Subscriber #1 =>" + data));
+        subject.onNext(12);
+        subject.onComplete();
+        subject.onNext(13);
+        subject.subscribe(data -> System.out.println("Subscriber #2 =>" + data));
+        subject.subscribe(data -> System.out.println("Subscriber #3 =>" + data));
+```
+
+### BehaviorSubject Class
+
+ - 구독자가 구독을 하면 가장 최근 값 혹은 기본값을 넘겨주는 클래스
+ - createDefault() 함수로 생성
+
+ ```java
+AsyncSubject<Integer> subject = AsyncSubject.create();
+        subject.onNext(10);
+        subject.onNext(11);
+        subject.subscribe(data -> System.out.println("Subscriber #1 =>" + data));
+        subject.onNext(12);
+        subject.onComplete();
+        subject.onNext(13);
+        subject.subscribe(data -> System.out.println("Subscriber #2 =>" + data));
+        subject.subscribe(data -> System.out.println("Subscriber #3 =>" + data));
+        
+ /*
+Subscriber #1 =>6
+Subscriber #1 =>1
+Subscriber #1 =>3
+Subscriber #2 =>3
+Subscriber #1 =>5
+Subscriber #2 =>5
+*/
+```
+
+### PublishSubject Class
+
+ - 구독자가 subscribe() 함수를 호출하면 값을 발행하기 시작
+ - AsyncSubject 클래스처럼 마지막 값만 발행하거나 BehaviorSubject 클래스처럼 발행한 값이 없을 때 기본값을 대신 발행하지도 않는다.
+ - 해당 시간에 발생한 데이터를 그대로 구독자에게 전달받음
  
+  ```java
+        PublishSubject<String> subject = PublishSubject.create();
+        subject.subscribe(data -> System.out.println("Subscriber #1 =>" + data));
+        subject.onNext("1");
+        subject.onNext("3");
+        subject.subscribe(data -> System.out.println("Subscriber #2 =>" + data));
+        subject.onNext("5");
+        subject.onComplete();
+        
+        /*
+        Subscriber #1 =>1
+        Subscriber #1 =>3
+        Subscriber #1 =>5
+        Subscriber #2 =>5
+         */
+```
+
+### ReplaySubject Class
+
+ - 구독자가 새로 생기면 항상 데이터의 처음부터 끝까지 발행하는 것을 보장
+ - 모든 데이터 내용을 저장해두는 과정 중 메모리 누수가 발생할 가능성을 염두에 두고 사용할 때 주의해야함
+ - create() 함수를 이용해 생성
+
+  ```java
+        ReplaySubject<String> subject = ReplaySubject.create();
+        subject.subscribe(data -> System.out.println("Subscriber #1 ->" + data));
+        subject.onNext("10");
+        subject.onNext("20");
+        subject.subscribe(data -> System.out.println("Subscriber #2 ->" + data));
+        subject.onNext("30");
+        subject.onComplete();
+
+        /*
+        Subscriber #1 ->10
+        Subscriber #1 ->20
+        Subscriber #2 ->10
+        Subscriber #2 ->20
+        Subscriber #1 ->30
+        Subscriber #2 ->30
+        */
+```
