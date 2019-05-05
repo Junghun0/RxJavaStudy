@@ -16,6 +16,7 @@ public class Main {
 //        new Example_10().usingBehaviorSubject();
 //        new Example_11().usingPublishSubject();
 //        new Example_12().usingReplaySubject();
-        new Example_14().usingMap();
+//        new Example_14().usingMap();
+        new Example_15().usingFlatMap();
     }
 }
