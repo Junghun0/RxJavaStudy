@@ -397,3 +397,11 @@ Subscriber #2 =>5
         Subscriber #2 ->30
         */
 ```
+
+### RxJava의 제네릭 함수형 인터페이스
+
+|  <center>인터페이스 이름</center> |  <center>포함 메서드</center> |  <center>설명</center> |
+|:--------|:--------:|--------:|
+|**Predicate< T >** | <center>boolean test(T t) </center> |*t 값을 받아서 참이나 거짓을 반환한다* |
+|**Consumer< T >** | <center>void accept(T t) </center> |*t 값을 받아서 처리한다.반환값은 없다.* |
+|**Function< T, R >** | <center>R apply(T t) </center> |*t 값을 받아서 결과를 반환한다.* |
