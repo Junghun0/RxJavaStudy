@@ -405,3 +405,17 @@ Subscriber #2 =>5
 |**Predicate< T >** | <center>boolean test(T t) </center> |*t 값을 받아서 참이나 거짓을 반환한다* |
 |**Consumer< T >** | <center>void accept(T t) </center> |*t 값을 받아서 처리한다.반환값은 없다.* |
 |**Function< T, R >** | <center>R apply(T t) </center> |*t 값을 받아서 결과를 반환한다.* |
+
+
+### 리액티브 함수 분류
+
+
+|  <center>연산자 종류</center> |  <center>연산자 함수</center> |
+|:--------|:--------:|
+|**생성 연산자** | <center>**just()**, **fromXXX()**, **create()**, interval(), range(), timer(), intervalRange(), defer(), repeat()</center>
+|**변환 연산자** | <center>**map()**, **flatMap()**, concatMap(), switchMap(), groupBy(), scan(), buffer(), window()</center>
+|**필터 연산자** | <center>**filter()**, **take()**, **skip()**, distinct()</center>
+|**결합 연산자** | <center>zip(), combineLatest(), merge(), concat()</center>
+|**조건 연산자** | <center>amb(), takeUntil(), skipUntil(), all()</center>
+|**에러 처리 연산자** | <center>onErrorReturn(), onErrorResumeNext(), retry(), retryUntil()</center>
+|**기타 연산자** | <center>**subscribe()**, subscribeOn(), observeOn(), **reduce()**, count()</center>
