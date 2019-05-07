@@ -28,10 +28,6 @@ public class DataQuery_Example {
         tvSales.subscribe(tot -> System.out.println("TV Sales : $" + tot));
     }
 
-
-
-
-
     class ProductSales{
         private String mProduct;
         private int mSale;
