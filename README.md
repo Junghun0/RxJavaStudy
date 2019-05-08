@@ -533,6 +533,7 @@ public final <R> Observable<R> map(Function<? super T, ? extends R> mapper)
  	- 결과가 Observable 로 나온다
  	- 스케줄러를 지원하지 않는다. 즉 현재 스레드에서 실행
  	- T를 넣으면 여러 개의 R이 나오도록 매핑한다.
+	- 먼저 들어온 데이터를 처리하는 도중에 새로운 데이터가 들어오면 나중에 들어온 데이터의 처리 결과가 먼저 출력될 수도 있다.(인터리빙/interleaving)
  
 ```java
 @CheckReturnValue
