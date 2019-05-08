@@ -509,5 +509,37 @@ public static Observable<Long> intervalRange(long start, long count, long initia
  	- repeat(N) 함수를 활용해 N번 만큼만 반복 실행하게 할수있다.
  	- 동작이 한 번 끝난 다음에 다시 구독하는 방식으로 동작
  	- 다시 구독할 때마다 동작하는 스레드의 번호가 달라진다.
+
+
+### 변환 연산자
+
+ - #### map()
+ 
+ 	- 입력값을 어떤 함수에 넣어서 원하는 값으로 변환하는 함수
+ 	
+ 	- 일정시간(period)를 쉬었다가 데이터를 발행
+ 	- 스케줄러를 지원하지 않는다. 즉 현재 스레드에서 실행
+ 
+```java
+@SchedulerSupport(SchedulerSupport.NONE)
+public final <R> Observable<R> map(Function<? super T, ? extends R> mapper)
+
+```
+
+ - #### flatMap()
+ 
+ 	- 입력값을 어떤 함수에 넣어서 원하는 값으로 변환하는 함수
+ 	
+ 	- 결과가 Observable 로 나온다
+ 	- 스케줄러를 지원하지 않는다. 즉 현재 스레드에서 실행
+ 	- T를 넣으면 여러 개의 R이 나오도록 매핑한다.
+ 
+```java
+@CheckReturnValue
+    @SchedulerSupport(SchedulerSupport.NONE)
+    public final <R> Observable<R> flatMap(Function<? super T, ? extends ObservableSource<? extends R>> mapper) {
+        return flatMap(mapper, false);
+    }
+```
     
     
