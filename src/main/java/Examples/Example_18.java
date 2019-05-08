@@ -17,8 +17,6 @@ public class Example_18 {
                 .take(5);
         source.subscribe(Log::it);
         CommonUtils.sleep(1000);
-
-
     }
 }
 

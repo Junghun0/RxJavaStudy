@@ -17,6 +17,8 @@ public class Main {
 //        new Example_11().usingPublishSubject();
 //        new Example_12().usingReplaySubject();
 //        new Example_14().usingMap();
-        new Example_15().usingFlatMap();
+//        new Example_15().usingFlatMap();
+//        new Example_19().usingConcatMap();
+        new Example_19().usingConcatMap2();
     }
 }
