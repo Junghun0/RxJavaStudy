@@ -419,3 +419,95 @@ Subscriber #2 =>5
 |**조건 연산자** | <center>amb(), takeUntil(), skipUntil(), all()</center>
 |**에러 처리 연산자** | <center>onErrorReturn(), onErrorResumeNext(), retry(), retryUntil()</center>
 |**기타 연산자** | <center>**subscribe()**, subscribeOn(), observeOn(), **reduce()**, count()</center>
+
+### 생성 연산자
+
+ - #### interval()
+ 
+ 	- 일정 시간 간격으로 데이터 흐름을 생성
+ 	
+ 	- 일정시간(period)를 쉬었다가 데이터를 발행
+ 
+```java
+ 	public static Observable<Long> interval(long period, TimeUnit unit) {
+        return interval(period, period, unit, Schedulers.computation());
+    }
+```
+
+ 	- 첫번째 함수와 동작은 같고 최초 지연 시간을 조절할 수 있다. (initialDelay 0이면 바로 데이터를 발행)
+ 	
+```java
+ 	public static Observable<Long> interval(long period, TimeUnit unit, Scheduler scheduler) {
+        return interval(period, period, unit, scheduler);
+    }
+```
+    
+ - #### timer()
+ 
+ 	- interval() 함수와 유사하지만 한 번만 실행하는 함수
+ 	- 일정 시간이 지난 후에 한 개의 데이터를 발행하고 onComplete() 이벤트가 발생
+ 	
+ 	
+ 	- interval()과 마찬가지로 메인 스레드가 아닌 계산 스케줄러에서 실행됨
+ 
+```java
+public static Observable<Long> timer(long delay, TimeUnit unit) {
+        return timer(delay, unit, Schedulers.computation());
+    }
+```
+ 	
+ - #### range()
+ 
+ 	- 주어진 값 n 부터 m 개의 Integer 객체를 발행한다.
+ 	- interval() 과 timer() 는 Long 객체를 발행했지만 range()는 Integer 객체를 발행하는 것이 다르다.
+
+ 	- 스케줄러에서 실행되지 않는다.
+ 	- 현재 스레드에서 실행함
+
+ 	- range()는 반복분(for,while)을 대체 할 수 있다.
+ 
+```java
+public static Observable<Integer> range(final int start, final int count) {
+
+ }
+```
+ 	
+ - #### intervalRange()
+ 
+ 	- interval() 함수처럼 일정한 시간 간격으로 값을 출력하지만 range() 함수처럼 n 부터 m 개만큼의 값만 생성하고 onComplete 이벤트 발생
+ 	- 리턴타입은 Long
+ 	- interval() 함수처럼 무한히 데이터 흐름을 발행하지 않는다.
+
+	- 계산 스케줄러에서 실행됨
+	 	
+```java
+public static Observable<Long> intervalRange(long start, long count, long initialDelay, long period, TimeUnit unit) {
+        return intervalRange(start, count, initialDelay, period, unit, Schedulers.computation());
+    }
+```
+ 	
+ - #### defer()
+ 
+ 	- timer() 함수와 비슷하지만 데이터 흐름 생성을 구독자가 subscribe() 함수를 호출할 때까지 미룰 수 있다.
+ 	- 이때 새로운 Observable 이 생성됨
+
+
+   - 스케줄러가 NONE 이므로 현재 스레드 에서 실행
+	- 인자로는 Callable < Observable< T >> 를 받음
+	- Callable 객체이므로 구독자가 subscribe()를 호출할 때까지 call()메서드의 호출을 미룰 수 있다.
+	
+```java
+@SchedulerSupport(SchedulerSupport.NONE)
+    public static <T> Observable<T> defer(Callable<? extends ObservableSource<? extends T>> supplier) {
+      
+    }
+```
+ 	
+ - #### repeat()
+ 
+ 	- repeat() 함수는 인자를 입력하지 않으면 영원히 반복 실행
+ 	- repeat(N) 함수를 활용해 N번 만큼만 반복 실행하게 할수있다.
+ 	- 동작이 한 번 끝난 다음에 다시 구독하는 방식으로 동작
+ 	- 다시 구독할 때마다 동작하는 스레드의 번호가 달라진다.
+    
+    
