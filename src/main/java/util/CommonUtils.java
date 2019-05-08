@@ -15,4 +15,14 @@ public class CommonUtils {
             e.printStackTrace();
         }
     }
+
+    public static String getShape(String obj){
+        if (obj == null || obj.equals("")) return "No-Shape";
+        if (obj.endsWith("-H")) return "Hexagon";
+        if (obj.endsWith("-O")) return "Octagon";
+        if (obj.endsWith("-R")) return "Rectangle";
+        if (obj.endsWith("-T")) return "Triangle";
+        if (obj.endsWith("#")) return "Custom";
+        return "BALL";
+    }
 }

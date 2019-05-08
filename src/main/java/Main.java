@@ -19,6 +19,7 @@ public class Main {
 //        new Example_14().usingMap();
 //        new Example_15().usingFlatMap();
 //        new Example_19().usingConcatMap();
-        new Example_19().usingConcatMap2();
+//        new Example_19().usingConcatMap2();
+        new Example_21().usingGroupBy();
     }
 }
