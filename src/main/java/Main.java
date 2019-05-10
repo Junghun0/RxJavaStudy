@@ -1,5 +1,6 @@
 import Examples.*;
 import Examples.scheduler.sExample_1;
+import Examples.scheduler.sExample_2;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,6 +24,7 @@ public class Main {
 //        new Example_19().usingConcatMap2();
 //        new Example_21().usingGroupBy();
 //        new sExample_1().usingScheduler1();
-        new sExample_1().usingScheduler2();
+//        new sExample_1().usingScheduler2();
+        new sExample_2().usingNewThreadScheduler();
     }
 }
