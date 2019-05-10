@@ -542,5 +542,19 @@ public final <R> Observable<R> map(Function<? super T, ? extends R> mapper)
         return flatMap(mapper, false);
     }
 ```
+
+
+
+### RxJava 스케줄러 종류
+- - -
+
+| 스케줄러 | RxJava 2.x |
+|---|:---:|
+| `뉴 스레드 스케줄러` | newThread()|
+| `싱글 스레드 스케줄러` | **single()** |
+| `계산 스케줄러` | computation() |
+| `IO 스케줄러` | io() |
+| `트램펄린 스케줄러` | trampoline() |
+| `메인 스레드 스케줄러` | **지원안함** |
     
     
