@@ -556,5 +556,6 @@ public final <R> Observable<R> map(Function<? super T, ? extends R> mapper)
 | `IO 스케줄러` | io() |
 | `트램펄린 스케줄러` | trampoline() |
 | `메인 스레드 스케줄러` | **지원안함** |
+| `테스트 스케줄러` | **지원안함** |
     
     
