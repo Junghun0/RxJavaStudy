@@ -1,7 +1,6 @@
-import Examples.*;
-import Examples.scheduler.sExample_1;
-import Examples.scheduler.sExample_2;
-import Examples.scheduler.sExample_6;
+import Examples.scheduler.Network.CallbackHeaven;
+import Examples.scheduler.Network.CallbackHell;
+import Examples.scheduler.Network.Scheduler_Network_Sample;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,6 +26,10 @@ public class Main {
 //        new sExample_1().usingScheduler1();
 //        new sExample_1().usingScheduler2();
 //        new sExample_2().usingNewThreadScheduler();
-        new sExample_6().convertExcecutor();
+//        new sExample_6().convertExcecutor();
+//        new Scheduler_Network_Sample().run();
+//        new CallbackHell().run();
+        new CallbackHeaven().usingZip();
+        new CallbackHeaven().usingConcat();
     }
 }
