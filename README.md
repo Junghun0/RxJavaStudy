@@ -420,7 +420,7 @@ Subscriber #2 =>5
 |**에러 처리 연산자** | <center>onErrorReturn(), onErrorResumeNext(), retry(), retryUntil()</center>
 |**기타 연산자** | <center>**subscribe()**, subscribeOn(), observeOn(), **reduce()**, count()</center>
 
-### 생성 연산자
+#### 생성 연산자
 
  - #### interval()
  
